@@ -1,6 +1,6 @@
 #TODO
 # DONE  convert to lists or array
-# DONE  determine outcome from lists or array - functions x_win, o_win, empty_present, x_o_diff needs a bool <= 2
+# DONE  determine outcome from lists or array - functions x_win, o_win, empty_present, x_o_differences needs a bool <= 2
 #figure how to organize data to test for completness or invalidity
 
 #NOTE
@@ -17,11 +17,14 @@
 
 # input = str(input()) # for submission
 input = 'XXXOOXOXO' #NOTE change to input() see above
+
+#Full string as individual string characters
 input_parser = []
 
 for char in input:
     input_parser.append(char)
 
+#Rows, columns, and diagnonals outcomes as a list with each element as a three letter string i.e. 'XXX' or 'XOO'
 outcomes = [
     input[0:3],     #row 1
     input[3:6],     #row 2
@@ -34,35 +37,48 @@ outcomes = [
 ]
 
 
-def x_win():
-    for i in range(len(outcomes)):
-        print(outcomes[i])
-    if outcomes[x] == 'XXX':
-        print('X wins')
-        return True
+# determines if x wins
+for i in range(len(outcomes)):
+    if outcomes[i] == 'XXX':
+        x_win = True
     else:
-        return False
+        x_win = False
 
-def o_win():
-    for i in range(len(outcomes)):
-        print(outcomes[i])
+# determines if o wins
+for i in range(len(outcomes)):
     if outcomes[i] == 'OOO':
-        print('O win')
-        return True
+        o_win = True
     else:
-        return False
+        o_win = False
 
-def empty_present():
-    for x in input:
-        if x == '_' or x == ' ':
-            print('Has unfilled slots')
-            return True
-        else:
-            return False
+# determines if there are emtpy spaces
+for x in input:
+    if x == '_' or x == ' ':
+        empty_present = True
+    else:
+        empty_present = False
 
-def x_o_diff():
-    difference = abs(input_parser.count('X') - input_parser.count('O'))
-    return difference
 
-print('spaces present :', empty_present())
-print('differences between x o count :', x_o_diff())
+x_o_differences = abs(input_parser.count('X') - input_parser.count('O'))
+
+# Printing output
+print('---------')
+print('|', input[0], input[1], input[2], '|')
+print('|', input[3], input[4], input[5], '|')
+print('|', input[6], input[7], input[8], '|')
+print('---------')
+
+
+# Data flow control
+if x_win == False and o_win == False and empty_present == True:
+    print('Game not finished')
+elif x_win == False and o_win == False and empty_present == False:
+    print('Draw')
+elif x_win == True and o_win == False and empty_present == False:
+    print('X wins')
+elif x_win == False and o_win == True and empty_present == False:
+    print('O wins')
+elif (x_win == True and o_win == True) or (x_o_differences >= 2):
+    print('Impossible')
+else:
+    print('Error')

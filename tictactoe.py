@@ -16,7 +16,7 @@
 # x_win:True, o_win:True or |count_x - count_o| >= 2
 
 # input = str(input()) # for submission
-input = 'XXXOOXOXO' #NOTE change to input() see above
+input = '_O_X__X_X' #NOTE change to input() see above
 
 #Full string as individual string characters
 input_parser = []
@@ -39,8 +39,11 @@ outcomes = [
 
 # determines if x wins
 for i in range(len(outcomes)):
+    print(outcomes[i])
     if outcomes[i] == 'XXX':
         x_win = True
+        print('X wins')
+        break
     else:
         x_win = False
 
@@ -48,6 +51,7 @@ for i in range(len(outcomes)):
 for i in range(len(outcomes)):
     if outcomes[i] == 'OOO':
         o_win = True
+        break
     else:
         o_win = False
 
@@ -55,12 +59,18 @@ for i in range(len(outcomes)):
 for x in input:
     if x == '_' or x == ' ':
         empty_present = True
+        break
     else:
         empty_present = False
 
 
 x_o_differences = abs(input_parser.count('X') - input_parser.count('O'))
 
+# Printing test vars
+print('x wins :', x_win)
+print('o wins :', o_win)
+print('emp spaces :', empty_present)
+print('x o diff :', x_o_differences)
 # Printing output
 print('---------')
 print('|', input[0], input[1], input[2], '|')
@@ -70,15 +80,15 @@ print('---------')
 
 
 # Data flow control
-if x_win == False and o_win == False and empty_present == True:
-    print('Game not finished')
-elif x_win == False and o_win == False and empty_present == False:
-    print('Draw')
-elif x_win == True and o_win == False and empty_present == False:
+if x_win == True and o_win == False:
     print('X wins')
-elif x_win == False and o_win == True and empty_present == False:
+elif x_win == False and o_win == True:
     print('O wins')
 elif (x_win == True and o_win == True) or (x_o_differences >= 2):
     print('Impossible')
+elif (x_win == False) and (o_win == False) and (empty_present == True):
+    print('Game not finished')
+elif x_win == False and o_win == False and empty_present == False:
+    print('Draw')
 else:
     print('Error')

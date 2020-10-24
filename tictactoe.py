@@ -75,6 +75,13 @@ for x in input:
 
 x_o_differences = abs(input_parser.count('X') - input_parser.count('O'))
 
+# if empty replace with x
+def if_empty_replace(n):
+    if input_parser[n] == ('_' or ' '):
+        input_parser[n] = 'X'
+    else:
+        print('This cell is occupied! Choose another one!')
+
 # Printing test vars
 # print('x wins :', x_win)
 # print('o wins :', o_win)
@@ -89,10 +96,60 @@ print('---------')
 
 
 #--------------------------------------------------
-print("Enter coords: ")
-coords_x, coords_y = '3 1'.split(" ")  # replace with input()
-print(coords_x, coords_y)
-print(type(coords_x))
+while True:
+    try:
+        print("Enter coords: ")
+        coords_x, coords_y = 'o 1'.split(" ")  # replace with input()
+        print(coords_x, coords_y)
+        coords_x = int(coords_x)
+        coords_y = int(coords_y)
+        print('coords x:', type(coords_x), 'coords y:', type(coords_y))
+
+        if coords_x == 1:
+            if coords_y == 1:
+                print(input_parser[6])
+                if_empty_replace(6)
+            elif coords_y == 2:
+                print(input_parser[3])
+                if_empty_replace(3)
+            elif coords_y == 3:
+                print(input_parser[0])
+                if_empty_replace(0)
+        elif coords_x == 2:
+            if coords_y == 1:
+                print(input_parser[7])
+                if_empty_replace(7)
+            elif coords_y == 2:
+                print(input_parser[4])
+                if_empty_replace(4)
+            elif coords_y == 3:
+                print(input_parser[1])
+                if_empty_replace(1)
+        elif coords_x == 3:
+            if coords_y == 1:
+                print(input_parser[8])
+                if_empty_replace(8)
+            elif coords_y == 2:
+                print(input_parser[5])
+                if_empty_replace(5)
+            elif coords_y == 3:
+                print(input_parser[2])
+                if_empty_replace(2)
+        elif coords_x < 1 or coords_x > 3:
+            print("Coordinates should be from 1 to 3!")
+        else:
+            print("Problem")
+        break
+    except ValueError:
+        print("You should enter numbers")
+        break
+
+def coordinate_filters(coords_x, coords_y): # change function to convert to int afterwards
+    if int(coords_x) == ValueError:
+        print('yuh')
+    elif coords_x != ('1' or '2' or '3'):
+        print('You should enter numbers!')
+
 
 # 0(1, 3) 1(2, 3) 2(3, 3)
 # 3(1, 2) 4(2, 2) 5(3, 2)
@@ -100,37 +157,38 @@ print(type(coords_x))
 
 # change below to function to replace coord with x or o
 # determines coordinates and whats in the location
-if coords_x == '1':
-    if coords_y == '1':
-        print(input_parser[6])
-    elif coords_y == '2':
-        print(input_parser[3])
-    elif coords_y == '3':
-        print(input_parser[0])
-elif coords_x == '2':
-    if coords_y == '1':
-        print(input_parser[7])
-    elif coords_y == '2':
-        print(input_parser[4])
-    elif coords_y == '3':
-        print(input_parser[1])
-elif coords_x == '3':
-    if coords_y == '1':
-        print(input_parser[8])
-    elif coords_y == '2':
-        print(input_parser[5])
-    elif coords_y == '3':
-        print(input_parser[2])
-else:
-    print("Problem")
+
+# if coords_x == 1:
+#     if coords_y == 1:
+#         print(input_parser[6])
+#     elif coords_y == 2:
+#         print(input_parser[3])
+#     elif coords_y == 3:
+#         print(input_parser[0])
+# elif coords_x == 2:
+#     if coords_y == 1:
+#         print(input_parser[7])
+#     elif coords_y == 2:
+#         print(input_parser[4])
+#     elif coords_y == 3:
+#         print(input_parser[1])
+# elif coords_x == 3:
+#     if coords_y == 1:
+#         print(input_parser[8])
+#         if_empty_replace(8)
+#     elif coords_y == 2:
+#         print(input_parser[5])
+#     elif coords_y == 3:
+#         print(input_parser[2])
+# # elif type(coords_x) != int:
+# #     print('You should enter numbers!')
+# elif coords_x < 1 or coords_x > 3:
+#     print("Coordinates should be from 1 to 3!")
+# else:
+#     print("Problem")
 
 
-# if empty replace with x
-def if_empty_replace(n):
-    if input_parser[n] == ('_' or ' '):
-        input_parser[n] = 'X'
-    else:
-        print('That square is already taken!')
+
 
 # Data flow control
 # if x_win == True and o_win == False:

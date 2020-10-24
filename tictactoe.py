@@ -90,17 +90,16 @@ print('---------')
 
 #--------------------------------------------------
 print("Enter coords: ")
-coords_x, coords_y = '3 1'.split(" ")
+coords_x, coords_y = '3 1'.split(" ")  # replace with input()
 print(coords_x, coords_y)
 print(type(coords_x))
 
 # 0(1, 3) 1(2, 3) 2(3, 3)
 # 3(1, 2) 4(2, 2) 5(3, 2)
 # 6(1, 1) 7(2, 1) 8(3, 1)
-def if_empty_repl(x, y):
-    if input_parser[n] == ('_' or ' '):
-        input_parser[n] = 'X'
 
+# change below to function to replace coord with x or o
+# determines coordinates and whats in the location
 if coords_x == '1':
     if coords_y == '1':
         print(input_parser[6])
@@ -124,8 +123,14 @@ elif coords_x == '3':
         print(input_parser[2])
 else:
     print("Problem")
-# if empty replace with x
 
+
+# if empty replace with x
+def if_empty_replace(n):
+    if input_parser[n] == ('_' or ' '):
+        input_parser[n] = 'X'
+    else:
+        print('That square is already taken!')
 
 # Data flow control
 # if x_win == True and o_win == False:

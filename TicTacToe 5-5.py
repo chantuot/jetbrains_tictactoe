@@ -140,11 +140,14 @@ print(og_board_state_parser)
 while True:
     check_winning()
     check_empty()
+    print(f"empty_present: {empty_present}")
+    print(f"winning: {winning}")
+    print(f"someone: {someone}")
     if winning == True:
         print_board_state()
         print(f"{someone} wins!")
         break
-    elif empty_present == False:
+    elif empty_present == True and winning == False:
         print("Draw")
         # parse_board_state("         ")
         break

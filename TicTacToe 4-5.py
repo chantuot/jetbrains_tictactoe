@@ -59,7 +59,6 @@ def coordinate_filters(coords_x, coords_y): # change function to convert to int 
     elif coords_x != ('1' or '2' or '3'):
         print('You should enter numbers!')
 
-# prints game board status onto console
 def print_board_state():
     print('---------')
     print('|', og_board_state_parser[0], og_board_state_parser[1], og_board_state_parser[2], '|')
@@ -67,7 +66,6 @@ def print_board_state():
     print('|', og_board_state_parser[6], og_board_state_parser[7], og_board_state_parser[8], '|')
     print('---------')
 
-# determins if cell on gameboard is empty and replace with X respectively
 def if_empty_replace(n):
     global og_board_state_parser
     if og_board_state_parser[n] == ('_' or ' '):
@@ -89,27 +87,9 @@ def get_board_state(field_input):
 
 
 og_board_state_parser = []
-get_board_state("         ")
-print_board_state()
+
 board_input = input("Enter cells:")
 get_board_state(board_input)
 print_board_state()
 check_cell()
 print_board_state()
-
-# console print tests for vars
-# print(og_board_state_parser)
-# print(len(og_board_state_parser))
-# print_board_state()
-# print(coords_x)
-
-
-# Flow control for main loop
-    # if len(og_board_state) > 9:
-    #     print("Too many characters for a 3 X 3 board. Try again.")
-    # elif len(og_board_state_parser) < 9:
-    #     print("Need more information to fill a 3 X 3 board. Try again.")
-    # else:
-    #     return og_board_state_parser
-
-#do board states next

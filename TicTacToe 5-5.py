@@ -147,7 +147,7 @@ while True:
         print_board_state()
         print(f"{someone} wins!")
         break
-    elif empty_present == True and winning == False:
+    elif empty_present == False and winning == False:
         print("Draw")
         # parse_board_state("         ")
         break

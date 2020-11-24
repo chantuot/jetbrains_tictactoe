@@ -1,4 +1,5 @@
 # check cells to see if they are empty or not and replace with X or O if empty
+# returns errors and error messages if input is incorrect
 def check_cell():
     while True:
         try:
@@ -49,7 +50,7 @@ def check_cell():
             break
 
 
-# determins if cell on gameboard is empty and replace with X respectively
+# determines if cell on gameboard is empty and replace with X respectively
 def replace(n):
     global og_board_state_parser
     if og_board_state_parser[n] == "_" or og_board_state[n] == " ":
@@ -57,13 +58,12 @@ def replace(n):
             og_board_state_parser[n] = "X"
         elif x_turn == False:
             og_board_state_parser[n] = "O"
-        # print(og_board_state_parser[n])
     else:
         print('This cell is occupied! Choose another one!')
         check_cell()
 
 
-# prints game board status onto console
+# prints game board status onto console with format layout
 def print_board_state():
     print('---------')
     print('|', og_board_state_parser[0], og_board_state_parser[1], og_board_state_parser[2], '|')
@@ -76,15 +76,15 @@ def print_board_state():
 # convert board string X's and O's to list with each element as X or O
 def parse_board_state(field_input):
     global og_board_state_parser, og_board_state
-    # print("Enter cells: ")
-    og_board_state = field_input    #NOTE change to og_board_state() see above
+    og_board_state = field_input
     for char in og_board_state:
         og_board_state_parser.append(char)
 
 
-def check_winning():    #Rows, columns, and diagnonals outcomes as a list with each element as a three letter string i.e. 'XXX' or 'XOO'
+# checks for winners by comparing all rows, columns, and diagonals for 3 matching, sets winer to 'X' or 'O'
+def check_winning():
 
-    global winning, someone
+    global winning, winner
 
     outcomes = [
         og_board_state_parser[3:6],     #row 2
@@ -97,42 +97,46 @@ def check_winning():    #Rows, columns, and diagnonals outcomes as a list with e
         og_board_state_parser[2:7:2]    #diagonal 2
     ]
 
-    # determines if x wins
+    # determines winners by matching X or O in all availble winning outcomes above
     for i in range(len(outcomes)):
         if outcomes[i] == ["X", "X", "X"]:
-            someone = "X"
+            winner = "X"
             print('X wins')
             winning = True
             break
         elif outcomes[i] == ["O", "O", "O"]:
-            someone = "O"
+            winner = "O"
             print("O wins")
             winning = True
             break
         else:
             pass
 
+# check for empty spots and adds them in a counter when it reaches 45 no more moves available
+# (9empty+8empty+...+1empty)= 45empty
 def check_empty():
 
-    global empty_present
+    global empty_present, empty_count
 
     for x in og_board_state_parser:
-        for i in x:
-            if i == "_" or x == " ":
-                empty_present = True
-                break
-            else:
-                empty_present = False
+        if x == "_" or x == " ":
+            pass
+        else:
+            empty_count += 1
+    if empty_count >= 45:
+        empty_present = False
 
 # initialize variables
 og_board_state_parser = []
 empty_present = True
 x_turn = True
 winning = False
-someone = "no one"
+winner = "no one"
+empty_count = 0
+
 
 # initialize empty board state
-parse_board_state("123456789")
+parse_board_state("         ")
 print_board_state()
 print(og_board_state_parser)
 
@@ -140,16 +144,12 @@ print(og_board_state_parser)
 while True:
     check_winning()
     check_empty()
-    print(f"empty_present: {empty_present}")
-    print(f"winning: {winning}")
-    print(f"someone: {someone}")
     if winning == True:
         print_board_state()
-        print(f"{someone} wins!")
+        print(f"{winner} wins!")
         break
     elif empty_present == False and winning == False:
         print("Draw")
-        # parse_board_state("         ")
         break
     elif empty_present == True:
         print("Empty present")
